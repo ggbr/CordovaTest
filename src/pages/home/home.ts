@@ -11,22 +11,17 @@ export class HomePage {
   constructor(private sim: Sim,public navCtrl: NavController) {
 
   }
-
+  msg(){
+    let local = this;
+    local.cardvar = "Teste ...";
+  }
   card(){
     let local = this;
-    this.sim.getSimInfo().then(
-      (info) => {local.cardvar = info}
-     
+    local.sim.getSimInfo().then(
+      (info) => console.log('Sim info: ', info),
+      (err) => console.log('Unable to get sim info: ', err)
     );
 
-    this.sim.hasReadPermission().then(
-      (info) => local.cardvar = info
-    );
-
-    this.sim.requestReadPermission().then(
-      () => console.log('Permission granted'),
-      () => console.log('Permission denied')
-    );
   }
 
 }
